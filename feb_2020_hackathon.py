@@ -32,7 +32,11 @@ if app_mode == 'Explanation':
 
 elif app_mode == 'App tips':
 
-    st.subheader('Tip 1: Show off your work')
+    st.sidebar.subheader('App inputs')
+    select_size = st.sidebar.selectbox('Choose header type', [3, 2, 1])
+    subheader_size = '#' * select_size
+
+    st.write(subheader_size, 'Tip 1: Show off your work')
     st.write('''Your project needs visuals, whether that\'s a video, audio clip, image, map, chart, or table. Streamlit supports
     all major charting libraries. Check out [docs.streamlit.io](http://docs.streamlit.io) to explore all the options.''')
 
@@ -48,7 +52,7 @@ elif app_mode == 'App tips':
 
     '-------------------'
 
-    st.subheader('Tip 2: Make it interactive')
+    st.write(subheader_size, 'Tip 2: Make it interactive')
     st.write('''Any variable can be made interactive by using a widget. Use widgets like `st.slider`, `st.selectbox`, and `st.radio`
     to let users of your app change parameters, select different inputs, or modify the output.
     ''')
@@ -59,29 +63,24 @@ elif app_mode == 'App tips':
 
     '-------------------'
 
-    st.subheader('Tip 3: Move widgets to sidebar')
+    st.write(subheader_size, 'Tip 3: Move widgets to sidebar')
     st.write('''By adding `st.sidebar` to any of your widgets you can move them to the sidebar on the left. This
     cleans up the layout and makes sure that your controls are always visible. _Note: some widgets are best
     left inline, especially if they only control one small part of the app._
     ''')
 
-    with st.echo():
-        st.sidebar.subheader('App inputs')
-        select_size = st.sidebar.selectbox('Choose header type', [3, 2, 1])
-
-    subheader_size = '#' * select_size
-    st.write(subheader_size, ' 👈👈 &nbsp; use the selectbox to change my header type!')
+    st.write('#### 👈👈 &nbsp; use the selectbox to change the header types!')
 
     '-------------------'
 
-    st.subheader('Tip 4: Add some text')
+    st.write(subheader_size, 'Tip 4: Add some text')
     st.write('''Write out the important parts that need explanation or use text to break up the layout of the app.
     Have a friend play with the app and tell you what isn't obvious, so you can add text for those sections.
     If you want to add text in the sidebar use `st.sidebar.subheader` or `st.sidebar.text`.''')
 
     '-------------------'
 
-    st.subheader('Tip 5: Hide extra text')
+    st.write(subheader_size, 'Tip 5: Hide extra text')
     st.write('''To keep your app layout clean, you can add in explanations or extra info, graphs, etc. by hiding
     that information behind a checkbox or a selectbox. See two examples below.''')
 
@@ -105,7 +104,7 @@ elif app_mode == 'App tips':
 
     '-------------------'
 
-    st.subheader('Tip 6: Use caching to speed up your app')
+    st.write(subheader_size, 'Tip 6: Use caching to speed up your app')
     st.write('''You want the app to run quickly for your users, so use `st.cache` for any expensive
     computation or data pulls. Read more about [how st.cache works](https://docs.streamlit.io/caching.html)
     and check out [documentation on advanced caching](https://docs.streamlit.io/advanced_caching.html)
@@ -113,7 +112,7 @@ elif app_mode == 'App tips':
 
     '-------------------'
 
-    st.subheader('Tip 7: Put the good stuff at the top')
+    st.write(subheader_size, 'Tip 7: Put the good stuff at the top')
     st.write('''If your project is a step by step walk through - then ignore this. If it\'s an app for someone to used, then you want
     to get them to the good, interactive stuff as soon as possible. This also means setting your app to have a default good outcome
     that users can see first before interacting with the app.''')
@@ -130,7 +129,7 @@ elif app_mode == 'App tips':
 
     '-------------------'
 
-    st.subheader('Tip 8: Show some code (maybe)')
+    st.write(subheader_size, 'Tip 8: Show some code (maybe)')
     st.write('''If you're teaching a concept it can be useful to show off some code. If it's codd not used in your app you can use `st.code`, but
     if you want to show the code for something you are doing in the app you can use 'with st.echo()' is what we use above to have code shown alongside output.
     ''')
@@ -141,7 +140,7 @@ elif app_mode == 'App tips':
 
 
     '-------------------'
-    st.subheader('Tip 9: Do something delightful')
+    st.write(subheader_size, 'Tip 9: Do something delightful')
     st.write('''Whenever possible try to use more exciting or fun examples, or for bonus points, add an
     unexpected and memorable interaction.
     ''')

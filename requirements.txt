@@ -1,0 +1,9 @@
+streamlit
+PIL
+io
+numpy
+pandas
+plotly.graph_objects
+math
+urllib
+requests

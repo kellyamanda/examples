@@ -1,5 +1,5 @@
 streamlit
-PIL
+Pillow
 io
 numpy
 pandas

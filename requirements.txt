@@ -1,6 +1,2 @@
-streamlit
 Pillow
-numpy
-pandas
-urllib
 requests

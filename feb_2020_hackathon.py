@@ -121,7 +121,7 @@ elif app_mode == 'App tips':
     '-------------------'
 
     st.write(subheader_size, 'Tip 7: Put the good stuff at the top')
-    st.write('''If your project is a step by step walk through - then ignore this. If it\'s an app for someone to used, then you want
+    st.write('''If your project is a step by step walk through - then ignore this. If it\'s an app for someone to use, then you want
     to get them to the good, interactive stuff as soon as possible. This also means setting your app to have a default good outcome
     that users can see first before interacting with the app.''')
 
@@ -138,8 +138,8 @@ elif app_mode == 'App tips':
     '-------------------'
 
     st.write(subheader_size, 'Tip 8: Show some code (maybe)')
-    st.write('''If you're teaching a concept it can be useful to show off some code. If it's codd not used in your app you can use `st.code`, but
-    if you want to show the code for something you are doing in the app you can use `with st.echo()` to have code shown inline with output.
+    st.write('''If you're teaching a concept it can be useful to show off some code. You can use `st.code` to format code, or if
+    you want to show the code for something you are doing in the app you can use `with st.echo()` to have code shown inline with output.
     ''')
 
     with st.echo():

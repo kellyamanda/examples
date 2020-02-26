@@ -2,7 +2,6 @@ streamlit
 Pillow
 numpy
 pandas
-plotly.graph_objects
 math
 urllib
 requests

@@ -69,6 +69,14 @@ elif app_mode == 'App tips':
     left inline, especially if they only control one small part of the app._
     ''')
 
+    sidebar_code = (
+    '''
+    st.sidebar.subheader('App inputs')
+    select_size = st.sidebar.selectbox('Choose header type', [3, 2, 1])
+    ''')
+
+    st.code(sidebar_code, language='python')
+
     st.write('#### 👈👈 &nbsp; use the selectbox to change the header types!')
 
     '-------------------'
@@ -131,7 +139,7 @@ elif app_mode == 'App tips':
 
     st.write(subheader_size, 'Tip 8: Show some code (maybe)')
     st.write('''If you're teaching a concept it can be useful to show off some code. If it's codd not used in your app you can use `st.code`, but
-    if you want to show the code for something you are doing in the app you can use 'with st.echo()' is what we use above to have code shown alongside output.
+    if you want to show the code for something you are doing in the app you can use `with st.echo()` to have code shown inline with output.
     ''')
 
     with st.echo():
@@ -232,7 +240,7 @@ elif app_mode == 'App example':
 
     elif treatment_select == 'Flip image':
 
-        flip_direction = st.selectbox('Select flip direction', ('Normal', 'Horizontal', 'Vertical'))
+        flip_direction = st.radio('Select flip direction', ('Normal', 'Horizontal', 'Vertical'))
 
         if flip_direction == 'Normal':
             st.image(img, caption=caption, width=500)
@@ -249,9 +257,3 @@ elif app_mode == 'App example':
 
 elif app_mode == 'Source code':
     'Add later'
-    # def get_file_content_as_string(path):
-    #     url = '/add_github_link' + path
-    #     response = urllib.request.urlopen(url)
-    #     return response.read().decode("utf-8")
-    #
-    # st.code(get_file_content_as_string("feb_2020_hackathon.py"))

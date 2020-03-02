@@ -6,7 +6,7 @@ import pandas as pd
 import plotly.graph_objects as go
 import math, urllib, requests
 
-st.sidebar.subheader('Welcome to the App!!!!!')
+st.sidebar.subheader('Welcome to the App')
 app_mode = st.sidebar.radio('Select mode', ('Explanation', 'App tips', 'App example', 'Source code'))
 
 if app_mode == 'Explanation':

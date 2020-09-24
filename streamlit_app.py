@@ -101,7 +101,7 @@ with c3:
     map(data, la_guardia[0],la_guardia[1], zoom_level)
 
 with c4:
-    st.write("JFK Airport"))
+    st.write("JFK Airport")
     map(data, jfk[0],jfk[1], zoom_level)
 
 with c5:

@@ -97,15 +97,15 @@ with c1:
     map(data, midpoint[0], midpoint[1], 11)
 
 with c3:
-    st.write("La Guardia Airport from %i:00 and %i:00" % (hour_selected, (hour_selected + 1) % 24))
+    st.write("La Guardia Airport")
     map(data, la_guardia[0],la_guardia[1], zoom_level)
 
 with c4:
-    st.write("JFK Airport from %i:00 and %i:00" % (hour_selected, (hour_selected + 1) % 24))
+    st.write("JFK Airport"))
     map(data, jfk[0],jfk[1], zoom_level)
 
 with c5:
-    st.write("Newark Airport from %i:00 and %i:00" % (hour_selected, (hour_selected + 1) % 24))
+    st.write("Newark Airport")
     map(data, newark[0],newark[1], zoom_level)
 
 # FILTERING DATA FOR THE HISTOGRAM

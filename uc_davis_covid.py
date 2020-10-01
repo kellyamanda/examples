@@ -2,20 +2,17 @@ import streamlit as st
 import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
-import matplotlib.style as style
 from datetime import date
 import matplotlib.dates as dates
 from matplotlib.dates import MonthLocator, DateFormatter, WeekdayLocator
 from matplotlib.ticker import NullFormatter
-import seaborn as sns
 from urllib.request import urlopen
 import json
 from pandas.io.json import json_normalize
 import pandas as pd
 import requests
 today = date.today()
-#sns.set_style('whitegrid')
-style.use('fivethirtyeight')
+
 plt.rcParams['lines.linewidth'] = 1
 dpi = 1000
 plt.rcParams['font.size'] = 13
@@ -236,11 +233,29 @@ def plot_county(county):
     ax4.set_title('(A) Weekly rolling mean of incidence per 100k')
     ax3.set_ylabel('Number of individuals')
     ax4.set_ylabel('per 100 thousand')
-    if len(county)<6:
-        plt.suptitle('Current situation of COVID-19 cases in '+', '.join(map(str, county))+' county ('+ str(today)+')')
-    else:
-        plt.suptitle('Current situation of COVID-19 cases in California ('+ str(today)+')')
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.figure(linewidth=1, edgecolor="#cccccc")
+
+
+    if len(county) == 1:
+        st.header('Current situation of COVID-19 cases in '+', '.join(map(str, county))+' county ('+ str(today)+')')
+
+    else:
+        st.header('Current situation of COVID-19 cases in '+', '.join(map(str, county))+' counties ('+ str(today)+')')
+
+    # a1, a2, a3 = st.beta_columns(3)
+    #
+    # with a1:
+    #     st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
+    #     st.text("Population under consideration = %s"% '{:,.0f}'.format(population))
+    #
+    # with a2:
+    #     st.text("Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
+    #     st.text("Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
+    #
+    # with a3:
+    #     st.text("% test positivity (14 day average)= "+"%.2f" % testing_percent)
+
 
     c1, c_space, c2 = st.beta_columns((10,.2,4))
 
@@ -248,15 +263,9 @@ def plot_county(county):
         st.write('')
         st.pyplot(fig)
 
-    with c2:
-        sub1, sub2 = st.beta_columns((.6,50))
-        with sub2:
-            st.write("### Quick stats for {}".format(county))
-            st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
-            st.text("Population under consideration = %s"% '{:,.0f}'.format(population))
-            st.text("Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
-            st.text("Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
-            st.text("% test positivity (14 day average)= "+"%.2f" % testing_percent)
+    # with c2:
+    #     sub1, sub2 = st.beta_columns((.6,50))
+    #     with sub2
 
     r1, r2, r3, r4 = st.beta_columns((2,2,2,2))
     row = [r1,r2,r3,r4]
@@ -266,6 +275,7 @@ def plot_county(county):
         for C in county:
             with c2:
                 # st.text(C)
+                st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
     elif len(county)<=3:
@@ -273,9 +283,18 @@ def plot_county(county):
         for C in county:
             with row[i]:
                 # st.text(C)
+                st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
                 i += 1
+
+    with c2:
+        # st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
+        st.write('')
+        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Population under consideration = %s"% '{:,.0f}'.format(population))
+        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
+        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
+        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% test positivity (14 day average)= "+"%.2f" % testing_percent)
 
 def plot_state():
     import numpy as np
@@ -405,16 +424,21 @@ def plot_state():
     ax4.set_title('(A) Weekly rolling mean of incidence per 100k')
     ax3.set_ylabel('Number of individuals')
     ax4.set_ylabel('per 100 thousand')
-    plt.suptitle('Current situation of COVID-19 cases in California ('+ str(today)+')')
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+    plt.figure(linewidth=1, edgecolor="#cccccc")
+
+    st.header('Current situation of COVID-19 cases in California ('+ str(today)+')')
 
     c1, c_space, c2 = st.beta_columns((10,.2,4))
 
     with c1:
+        st.write('')
         st.pyplot(fig)
 
     with c2:
-        st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
+        # st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
+        st.write('')
+        st.write('')
         st.text("Population under consideration = %s"% '{:,.0f}'.format(population))
         st.text("Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
         st.text("Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
@@ -465,17 +489,10 @@ if sidebar_selection == 'Select Counties':
     plot_county(COUNTIES_SELECTED)
 
 if sidebar_selection == 'Tri-County Area':
-    st.markdown("## Combined tri-county area (Yolo, Sacramento, Solano)")
     plot_county(['Yolo', 'Solano', 'Sacramento'])
-    st.markdown("## Yolo county")
     plot_county(['Yolo'])
-    st.markdown("## Sacramento county")
     plot_county(['Sacramento'])
-    st.markdown("## Solano county")
     plot_county(['Solano'])
 
-california = st.beta_expander ('View state of California data')
-
 if sidebar_selection == 'California':
-    st.markdown("## State of California")
     plot_state()

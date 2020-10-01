@@ -4,6 +4,5 @@ requests
 altair
 pydeck
 matplotlib
-json
 seaborn
 streamlit-nightly

@@ -279,7 +279,7 @@ def plot_county(county):
                 st.write('')
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
-                components.iframe("https://covidactnow.org/embed/us/county/"+f, height=365, scrolling=False)
+                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=500, height=365, scrolling=False)
     elif len(county)<=3:
         i = 0
         for C in county:
@@ -288,7 +288,7 @@ def plot_county(county):
                 st.write('')
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
-                components.iframe("https://covidactnow.org/embed/us/county/"+f, height=365, scrolling=False)
+                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=500, height=365, scrolling=False)
                 i += 1
 
     with c2:

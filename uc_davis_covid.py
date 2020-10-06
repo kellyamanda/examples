@@ -12,7 +12,8 @@ from pandas.io.json import json_normalize
 import pandas as pd
 import requests
 today = date.today()
-
+#sns.set_style('whitegrid')
+# style.use('fivethirtyeight')
 plt.rcParams['lines.linewidth'] = 1
 dpi = 1000
 plt.rcParams['font.size'] = 13
@@ -257,7 +258,7 @@ def plot_county(county):
     #     st.text("% test positivity (14 day average)= "+"%.2f" % testing_percent)
 
 
-    c1, c_space, c2 = st.beta_columns((10,.2,4))
+    c1, c2 = st.beta_columns((8,4))
 
     with c1:
         st.write('')
@@ -276,6 +277,7 @@ def plot_county(county):
             with c2:
                 # st.text(C)
                 st.write('')
+                st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
     elif len(county)<=3:
@@ -283,6 +285,7 @@ def plot_county(county):
         for C in county:
             with row[i]:
                 # st.text(C)
+                st.write('')
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
@@ -429,7 +432,7 @@ def plot_state():
 
     st.header('Current situation of COVID-19 cases in California ('+ str(today)+')')
 
-    c1, c_space, c2 = st.beta_columns((10,.2,4))
+    c1, c2 = st.beta_columns((11,4))
 
     with c1:
         st.write('')
@@ -439,10 +442,10 @@ def plot_state():
         # st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
         st.write('')
         st.write('')
-        st.text("Population under consideration = %s"% '{:,.0f}'.format(population))
-        st.text("Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
-        st.text("Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
-        st.text("% test positivity (14 day average)= "+"%.2f" % testing_percent)
+        st.markdown("Population under consideration = %s"% '{:,.0f}'.format(population))
+        st.markdown("Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
+        st.markdown("Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
+        st.markdown("% test positivity (14 day average)= "+"%.2f" % testing_percent)
 
 @st.cache(ttl=3*60*60, suppress_st_warning=True)
 def get_data():
@@ -455,11 +458,15 @@ def get_data():
 confirmed, deaths = get_data()
 
 t1, t2 = st.beta_columns(2)
-t1.markdown('# COVID-19 Data and Reporting')
-t2.markdown("")
-t2.subheader("""
-**EpiCenter for Disease Dynamics** | School of Veterinary Medicine - UC Davis
-""")
+with t1:
+    st.markdown('# COVID-19 Data and Reporting')
+
+with t2:
+    st.markdown("")
+    st.subheader("""
+    **EpiCenter for Disease Dynamics** | School of Veterinary Medicine - UC Davis
+    """)
+
 st.markdown("""
 COVID-Local provides basic key metrics against which to assess pandemic response and progress toward reopening.
 See more at https://www.covidlocal.org/metrics/

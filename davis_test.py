@@ -27,6 +27,7 @@ plt.rcParams['figure.figsize'] = 8, 8
 
 
 st.beta_set_page_config(page_title="COVID19: EpiCenter for Disease Dynamics",
+                   layout='wide',
                    initial_sidebar_state='auto')
 
 st.sidebar.write('')
@@ -267,28 +268,29 @@ def plot_county(county):
     #     sub1, sub2 = st.beta_columns((.6,50))
     #     with sub2
 
-    r1, r2, r3, r4, r5,r6,r7,r8 = st.beta_columns(8)
-    row = [r1,r2,r3,r4,r5,r6,r7,r8]
+    r1, r2, r3, r4, r5 = st.beta_columns(5)
+    row = [r1,r2,r3,r4,r5]
 
     import streamlit.components.v1 as components
-    # if len(county)==1:
-    #     for C in county:
-    #         with c2:
-    #             # st.text(C)
-    #             st.write('')
-    #             st.write('')
-    #             f = FIPSs[FIPSs.County == C].FIPS.values[0]
-    #             components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-    # elif len(county)<=3:
-    #     i = 0
-    #     for C in county:
-    #         with row[i]:
-    #             # st.text(C)
-    #             st.write('')
-    #             st.write('')
-    #             f = FIPSs[FIPSs.County == C].FIPS.values[0]
-    #             components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-    #             i += 2
+    if len(county)==1:
+        for C in county:
+            with c2:
+                # st.text(C)
+                st.write('')
+                st.write('')
+                f = FIPSs[FIPSs.County == C].FIPS.values[0]
+                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
+    elif len(county)<=3:
+        i = 0
+        for C in county:
+            with row[i]:
+                # st.text(C)
+                st.write('')
+                st.write('')
+                f = FIPSs[FIPSs.County == C].FIPS.values[0]
+                st.image("spacer2.png")
+                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
+                i += 2
 
     with c2:
         # st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
@@ -297,6 +299,23 @@ def plot_county(county):
         st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
         st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
         st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% test positivity (14 day average)= "+"%.2f" % testing_percent)
+
+    z1, z2, z3 = st.beta_columns(3)
+    f = FIPSs[FIPSs.County == 'Yolo'].FIPS.values[0]
+    with z1:
+        st.image("spacer2.png")
+        components.html(
+            """
+            <div>
+            </div>
+            """,
+            width=350,
+        )
+        components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
+
+    with z3:
+        st.image("spacer2.png")
+        components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
 
 def plot_state():
     import numpy as np
@@ -502,8 +521,3 @@ if sidebar_selection == 'Tri-County Area':
 
 if sidebar_selection == 'California':
     plot_state()
-
-z1, z2, z3 = st.beta_columns(3)
-z1.write('Test1234567Test1234567Test1234567')
-z2.write('TestABCDEFG')
-z3.write('Test&&&&&&&')

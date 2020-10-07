@@ -268,8 +268,8 @@ def plot_county(county):
     #     sub1, sub2 = st.beta_columns((.6,50))
     #     with sub2
 
-    r1, r2, r3, r4, r5 = st.beta_columns(5)
-    row = [r1,r2,r3,r4,r5]
+    r1, r2, r3 = st.beta_columns(5)
+    row = [r1,r2,r3]
 
     import streamlit.components.v1 as components
     if len(county)==1:
@@ -290,7 +290,7 @@ def plot_county(county):
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
                 st.image("spacer2.png")
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-                i += 2
+                i += 1
 
     with c2:
         # st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
@@ -312,7 +312,7 @@ def plot_county(county):
     #         width=350,
     #     )
     #     components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-    # 
+    #
     # with z3:
     #     st.image("spacer2.png")
     #     components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)

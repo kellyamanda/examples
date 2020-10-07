@@ -268,7 +268,7 @@ def plot_county(county):
     #     sub1, sub2 = st.beta_columns((.6,50))
     #     with sub2
 
-    r1, r2, r3 = st.beta_columns(5)
+    r1, r2, r3 = st.beta_columns(3)
     row = [r1,r2,r3]
 
     import streamlit.components.v1 as components

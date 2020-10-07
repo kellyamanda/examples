@@ -288,7 +288,6 @@ def plot_county(county):
                 st.write('')
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
-                st.image("spacer2.png")
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
                 i += 2
 
@@ -299,23 +298,6 @@ def plot_county(county):
         st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
         st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
         st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% test positivity (14 day average)= "+"%.2f" % testing_percent)
-
-    # z1, z2, z3 = st.beta_columns(3)
-    # f = FIPSs[FIPSs.County == 'Yolo'].FIPS.values[0]
-    # with z1:
-    #     st.image("spacer2.png")
-    #     components.html(
-    #         """
-    #         <div>
-    #         </div>
-    #         """,
-    #         width=350,
-    #     )
-    #     components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-    #
-    # with z3:
-    #     st.image("spacer2.png")
-    #     components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
 
 def plot_state():
     import numpy as np
@@ -475,7 +457,7 @@ def get_data():
 
 confirmed, deaths = get_data()
 
-t1, t_space, t2 = st.beta_columns(3)
+t1, t2 = st.beta_columns(2)
 with t1:
     st.markdown('# COVID-19 Data and Reporting')
 

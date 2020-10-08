@@ -239,10 +239,10 @@ def plot_county(county):
 
 
     if len(county) == 1:
-        st.header('Current situation of COVID-19 cases in '+', '.join(map(str, county))+' county ('+ str(today)+')')
+        st.subheader('Current situation of COVID-19 cases in '+', '.join(map(str, county))+' county ('+ str(today)+')')
 
     else:
-        st.header('Current situation of COVID-19 cases in '+', '.join(map(str, county))+' counties ('+ str(today)+')')
+        st.subheader('Current situation of COVID-19 cases in '+', '.join(map(str, county))+' counties ('+ str(today)+')')
 
     # a1, a2, a3 = st.beta_columns(3)
     #
@@ -268,9 +268,6 @@ def plot_county(county):
     #     sub1, sub2 = st.beta_columns((.6,50))
     #     with sub2
 
-    r1, r2, r3, r4 = st.beta_columns((2,2,2,2))
-    row = [r1,r2,r3,r4]
-
     import streamlit.components.v1 as components
     if len(county)==1:
         for C in county:
@@ -279,8 +276,10 @@ def plot_county(county):
                 st.write('')
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
-                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=500, height=365, scrolling=False)
-    elif len(county)<=3:
+                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
+    elif len(county)==2:
+        r1, r2, r3= st.beta_columns(3)
+        row = [r1,r2,r3]
         i = 0
         for C in county:
             with row[i]:
@@ -288,9 +287,21 @@ def plot_county(county):
                 st.write('')
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
-                st.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;")
-                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=500, height=365, scrolling=False)
-                i += 1
+                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
+                i += 2
+    elif len(county)==3:
+        #Still not working for 3
+        r1, r2, r3, r4, r5, r6= st.beta_columns(6)
+        row = [r1,r2,r3,r4,r5,r6]
+        i = 0
+        for C in county:
+            with row[i]:
+                # st.text(C)
+                st.write('')
+                st.title('')
+                f = FIPSs[FIPSs.County == C].FIPS.values[0]
+                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
+                i += 2
 
     with c2:
         # st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
@@ -431,7 +442,7 @@ def plot_state():
     plt.tight_layout(rect=[0, 0.03, 1, 0.95])
     plt.figure(linewidth=1, edgecolor="#cccccc")
 
-    st.header('Current situation of COVID-19 cases in California ('+ str(today)+')')
+    st.subheader('Current situation of COVID-19 cases in California ('+ str(today)+')')
 
     c1, c2 = st.beta_columns((11,4))
 
@@ -463,11 +474,12 @@ with t1:
     st.markdown('# COVID-19 Data and Reporting')
 
 with t2:
-    st.markdown("")
-    st.subheader("""
+    st.header("")
+    st.write("""
     **EpiCenter for Disease Dynamics** | School of Veterinary Medicine - UC Davis
     """)
 
+st.write("")
 st.markdown("""
 COVID-Local provides basic key metrics against which to assess pandemic response and progress toward reopening.
 See more at https://www.covidlocal.org/metrics/

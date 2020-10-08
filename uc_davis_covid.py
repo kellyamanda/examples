@@ -258,7 +258,8 @@ def plot_county(county):
     #     st.text("% test positivity (14 day average)= "+"%.2f" % testing_percent)
 
 
-    c1, c2 = st.beta_columns((8,4))
+    c1, c_space, c2 = st.beta_columns((8,.25,4))
+    c3 = st.beta_container()
 
     with c1:
         st.write('')
@@ -277,39 +278,23 @@ def plot_county(county):
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-    elif len(county)==2:
-        r1, r2, r3= st.beta_columns(3)
-        row = [r1,r2,r3]
-        i = 0
+    elif len(county)<=3:
         for C in county:
-            with row[i]:
+            with c3:
                 # st.text(C)
                 st.write('')
                 st.write('')
                 f = FIPSs[FIPSs.County == C].FIPS.values[0]
                 components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-                i += 2
-    elif len(county)==3:
-        #Still not working for 3
-        r1, r2, r3, r4, r5, r6= st.beta_columns(6)
-        row = [r1,r2,r3,r4,r5,r6]
-        i = 0
-        for C in county:
-            with row[i]:
-                # st.text(C)
-                st.write('')
-                st.title('')
-                f = FIPSs[FIPSs.County == C].FIPS.values[0]
-                components.iframe("https://covidactnow.org/embed/us/county/"+f, width=350, height=365, scrolling=False)
-                i += 2
 
     with c2:
         # st.text('# new cases averaged over last 7 days = %s' %'{:,.1f}'.format(metric.values[0]))
         st.write('')
-        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Population under consideration = %s"% '{:,.0f}'.format(population))
-        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
-        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
-        st.markdown("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;% test positivity (14 day average)= "+"%.2f" % testing_percent)
+        st.write('')
+        st.markdown("Population under consideration = %s"% '{:,.0f}'.format(population))
+        st.markdown("Total cases = %s"% '{:,.0f}'.format(county_confirmed_time.tail(1).values[0][0]))
+        st.markdown("Total deaths = %s"% '{:,.0f}'.format(county_deaths_time.tail(1).values[0][0]))
+        st.markdown("% test positivity (14 day average)= "+"%.2f" % testing_percent)
 
 def plot_state():
     import numpy as np

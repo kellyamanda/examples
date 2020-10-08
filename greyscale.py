@@ -1,6 +1,7 @@
 import streamlit as st
 from PIL import Image
 
+st.set_option('deprecation.showfileUploaderEncoding', False)
 image = st.file_uploader("Select an image!")
 
 col1, col2 = st.beta_columns(2)
